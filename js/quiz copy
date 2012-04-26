@@ -1,32 +1,34 @@
 /**
  * Quiz controls and functions
  */
+var content;
+var quiz_name;
+var quiz_question;
 $(document).ready(function(){
-	var content = $("#content");
-	var quiz_name = $("#new-quiz-name");	
-	var quiz_question = $("#new-quiz-question");	
+	content = $("#content");
+	quiz_name = $("#new-quiz-name");	
+	quiz_question = $("#new-quiz-question");	
+	bindListeners();
+
+	loadHome();
+
+});
 /**----------------------
  *    UI FUNCTIONS
 ------------------------*/
-	loadHome();
-	function loadQuiz(id){ 
+function loadQuiz(id){ 
+		console.log("Loading quiz ID:"+id);
 		//set up views
 		$("#quiz-view").show();
 		$("#home-view").hide();
 		$('#live-thankyou').hide(); 
 		//get quiz from db
 		var current = fetchQuiz(id);
+		console.log("Fetched quiz - current: "+current);
 		//set the quiz name
 		$("#live-name").text(current.name);
 		$("#live-name").attr('data-quiz-id',id);
 		$("#live-question").text("Q: "+current.question);
-		bindListeners();
-	}
-	function showResults(id){ 
-
-		//get quiz from db
-		var current = fetchQuiz(id);
-		console.log(current); 
 	}
 	function loadHome(){
 		//set up views
@@ -42,12 +44,12 @@ $(document).ready(function(){
 		}
 		//refresh the quiz list
 		refreshList();
-		bindListeners(); 
 	}
 /**----------------------
- *    BUTTON LISTENERS
+*    BUTTON LISTENERS
 ------------------------*/
-	function bindListeners(){
+function bindListeners(){
+	console.log("Binding listeners"); 
 	/**
 	 * listener for new quiz button
 	 */
@@ -64,7 +66,7 @@ $(document).ready(function(){
 			refreshList();
 		}
 	});
-	/** 
+	/**
 	 * listener clear list button
 	 */
 	$("#list-wrapper .clear").click(function(){
@@ -72,25 +74,23 @@ $(document).ready(function(){
 		if (answer){
 			store.set('quizlist',[]);
 			refreshList();
-			bindListeners();
 		}
 		else{
+			
 		}
 	});
 	
-	/**-------------------------------
-	 * listener sform quiz list items 
-	 ------------------------------*/
+	/**
+	 * listener form quiz LIST ITEMS
+	 */
 	$(".quiz-link").click(function(){
+		console.log("Quiz link clicked");
 		var link = $(this).attr('data-quiz');
+		console.log("Quiz selected for "+link);
 		loadQuiz(link);
 	});
-	$(".quiz-results").click(function(){
-		var link = $(this).attr('data-quiz');
-		showResults(link);
-	});
 	/**
-	 * listener for answering
+	 * Answer button
 	 */
 	$("#live-answer-button").click(function(){
 		$('#live-inputs').show();
@@ -126,15 +126,12 @@ $(document).ready(function(){
 	$("#live-finish-button").click(function(){
 		loadHome();
 	});
-	}
-});  
+}
 /**----------------------
  *    DB FUNCTIONS
  ------------------------*/
 function insertAnswer(id, answer){
-	console.log(answer);
-	var quizs = store.get('quizlist');
-	console.log(quizs);
+		var quizs = store.get('quizlist');
 	var i = 0; 
 	var marker = -1;
 	for(i = 0; i < quizs.length ; i++)
@@ -162,9 +159,7 @@ return newDate.getTime();
  */
 function createQuiz(_name,_question){
 	var current_list = store.get('quizlist');
-	var time = uniqueId();
-	console.log(time);
-	var new_quiz =  [{id: time, name:_name, question:_question, answers:[]}];
+	var new_quiz =  [{id: uniqueId(), name:_name, question:_question, answers:[]}];
 	var new_list = $.merge( current_list, new_quiz );
 	console.log("inside createQuiz");
 	console.log(new_list);
@@ -203,7 +198,7 @@ function refreshList(){
 		str += '<p class="ui-li-desc">'+current.question+'</p>';
 		str += '<span class="ui-li-count ui-btn-up-c ui-btn-corner-all">'+answer_count+'</span>';
 		str += '</a>';
-		str += '<a data-split-icon="info" data-icon="info" data-quiz="'+current.id+'" class="quiz-results"></a>' 
+		str += '<a data-split-icon="info" data-icon="info"></a>' 
 		str += '</li>';
 	}
 	list.append(str);

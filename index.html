@@ -6,8 +6,10 @@
 	***********************-->	 
 	<title>Quiz</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<!-- standard jQuery Mobile -->
+	<!-- jQuery Mobile css plus additional -->
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+	<link rel="stylesheet" href="style.css" />
+	<!-- standard jQuery Mobile libary-->
 	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
 	<!-- custom app functions -->
@@ -19,34 +21,43 @@
 </head> 
 <body>  
 
-<div data-role="page">
+<div data-role="page" data-theme="a">
 
-	<div data-role="header">
-		<h1>Property Quiz</h1>
+	<div data-role="header" class='header-wrap'>
+		<h1><span class='header-title'>SalesPartner </span> Property Quiz</h1>
 	</div><!-- /header -->
 
-	<div data-role="content" id='content' class="ui-content">
+	<div data-role="content" id='content'  class="ui-content">
 		<!--***********************
 			     HOME VIEWS
 		***********************-->	
 		<div id='home-view'>
-			<h2>Quiz List</h2>
+			
 			<!-- list controls -->
 			<div id='quiz-controls'>
-			<div> 
+			<div class='section'> 
 				<h3>New Quiz</h3>
 				<label for="name">Name:</label>
 				<input type="text" name="name" data-inline="true" id="new-quiz-name" data-mini="true" />
 				<label for="question">Question:</label>
 				<input type="text" name="question" data-inline="true" id="new-quiz-question" data-mini="true" />
-				<a class='new' data-role="button" data-inline="true">New</a>
+				<a class='new' data-icon="plus" data-role="button" data-inline="true">New</a>
 			</div>
-			<a class='clear' data-role="button" data-inline="true">Clear</a>
+			
 			</div>
 			
 			<!-- list -->
-			<div style='margin-top:20px;'>
-			<ul data-role="listview" id='quiz-list'>
+			<div id='list-wrapper' class='section'>
+			
+			<h2>Quiz List</h2>
+			<p>Select to continue / begin a quiz. Click the information icon to view the current results.
+				Data is stored in the device's browser - to back up information click export.</p>
+				<a class='clear' data-icon="delete" data-role="button" data-inline="true">Clear</a>
+				<a  data-icon="left-arrow" data-role="button" data-inline="true">Import</a>
+				<a  data-icon="star" data-role="button" data-inline="true">Export</a>
+		
+			<!-- list -->
+			<ul data-role="listview" data-inset="true" id='quiz-list'>
 			</ul>
 			</div>	
 		</div>
@@ -54,22 +65,26 @@
 			     QUIZ VIEWS
 		***********************-->	
 		<div id="quiz-view">
-			<!-- quiz attributes -->
-			<h2 id='live-name'></h2>
-			<h3 id='live-question'></h3>
-			<!-- inputs for answering questions-->
-			<div id='live-inputs'>
-			    <label for="name">Name:</label>
-				<input type="text" name="name" data-inline="true" id="live-name-input" data-mini="true" />
-				<label for="answer">Answer:</label>
-				<input type="text" name="answer" data-inline="true" id="live-answer" data-mini="true" />
-				<a id='live-submit' data-role="button" data-inline="true" data-theme="b">Submit</a>
+			<div class='section'>
+				<!-- quiz attributes -->
+				<h2 id='live-name'></h2>
+				<h3 id='live-question'></h3>
+				<!-- inputs for answering questions-->
+				<div id='live-inputs'>
+				    <label for="name">Name:</label>
+					<input type="text" name="name" data-inline="true" id="live-name-input" data-mini="true" />
+					<label for="answer">Answer:</label>
+					<input type="text" name="answer" data-inline="true" id="live-answer" data-mini="true" />
+					<a id='live-submit' data-role="button" data-inline="true" data-theme="b">Submit</a>
+				</div>
+				<!-- hidden thankyou message -->
+				<div id='live-thankyou'>
+				<h3>Thank you, your answer has been saved.</h3>
+				<a id='live-answer-button' data-role="button" data-inline="true" data-theme="b">Answer</a>
+				</div>
 			</div>
-			<!-- hidden thankyou message -->
-			<div id='live-thankyou'>
-			<h3>Thank you, your answer has been saved.</h3>
-			<a id='live-answer-button' data-role="button" data-inline="true" data-theme="b">Answer</a>
-			</div>
+			
+			<a id='live-finish-button' data-role="button" data-inline="true">Finish Quiz</a>
 		</div>
 	</div><!-- /content -->
 

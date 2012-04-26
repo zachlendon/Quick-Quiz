@@ -1,0 +1,29 @@
+/**
+ * 	Styles in addition to standard jQuery mobile css
+ */
+.ui-body-a, .ui-overlay-a {
+	color:black;
+	text-shadow: #fff 0px 1px 1px;
+	background:transparent url('images/bg.jpg') repeat center center;
+}
+
+.ui-corner-all{
+	border-radius:0px;
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+}
+.ui-content .ui-listview {
+margin: 0px -15px;
+}
+.section{
+	background:rgba(255,255,255,0.5);
+	padding:20px;
+	box-shadow:0px 2px 3px rgba(0,0,0,0.2);
+	margin-bottom:20px;
+}
+.ui-li-count{
+	margin-right:20px;
+}
+.header-wrap h1{
+	color: #FFCC33;
+}
