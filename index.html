@@ -1,13 +1,18 @@
 <!DOCTYPE html> 
 <html> 
-	<head> 
+	<head>
+	<!--***********************
+			HEAD
+	***********************-->	 
 	<title>Quiz</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<!-- load scripts and styles -->
+	<!-- standard jQuery Mobile -->
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+	<!-- custom app functions -->
 	<script src="js/quiz.js"></script>
+	<!-- store.js library requirements for local storage -->
 	<script src="js/json.js"></script>
 	<script src="js/store.js"></script>
 	<!-- end -->
@@ -20,7 +25,10 @@
 		<h1>Property Quiz</h1>
 	</div><!-- /header -->
 
-	<div data-role="content" id='content' class="ui-content">	
+	<div data-role="content" id='content' class="ui-content">
+		<!--***********************
+			     HOME VIEWS
+		***********************-->	
 		<div id='home-view'>
 			<h2>Quiz List</h2>
 			<!-- list controls -->
@@ -42,9 +50,14 @@
 			</ul>
 			</div>	
 		</div>
+		<!--***********************
+			     QUIZ VIEWS
+		***********************-->	
 		<div id="quiz-view">
+			<!-- quiz attributes -->
 			<h2 id='live-name'></h2>
 			<h3 id='live-question'></h3>
+			<!-- inputs for answering questions-->
 			<div id='live-inputs'>
 			    <label for="name">Name:</label>
 				<input type="text" name="name" data-inline="true" id="live-name-input" data-mini="true" />
@@ -52,6 +65,7 @@
 				<input type="text" name="answer" data-inline="true" id="live-answer" data-mini="true" />
 				<a id='live-submit' data-role="button" data-inline="true" data-theme="b">Submit</a>
 			</div>
+			<!-- hidden thankyou message -->
 			<div id='live-thankyou'>
 			<h3>Thank you, your answer has been saved.</h3>
 			<a id='live-answer-button' data-role="button" data-inline="true" data-theme="b">Answer</a>
